@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <title>SEACUB</title>
+  </head>
+  <body>
+    <main>
+      <!-- #game-intro is initially shown on the game start screen -->
+      <div id="game-intro">
+        <img src="./images/logo.jfif" alt="" class="logo-img" />
+        <br />
+        <button id="start-button">Start Game</button>
+        <p>
+          Use the left and right arrows keys to control the ship, and space key
+          to shoot torpedos.
+        </p>
+      </div>
+
+      <div id="game-container">
+        <!-- #game-screen is initially hidden using CSS style display: none -->
+        <div id="game-screen">
+          <div id="game-scoreboard">
+            <div id="lives-counter"></div>
+            <div id="score-counter"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- #game-end is initially hidden using CSS style display: none -->
+      <div id="game-end">
+        <img src="./images/logo.png" alt="" class="logo-img" />
+        <h1>Game Over</h1>
+        <br />
+        <button id="restart-button">Restart</button>
+      </div>
+    </main>
+
+    <script type="text/javascript" src="./js/script.js"></script>
+  </body>
+</html>
