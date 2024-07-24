@@ -24,13 +24,13 @@ window.onload = function () {
       // Update player's directionX and directionY based on the key pressed
       switch (key) {
         case "ArrowLeft":
-          game.player.directionX = -8;
+          game.player.directionX = -3;
           break;
         case "ArrowRight":
-          game.player.directionX = 8;
+          game.player.directionX = 3;
           break;
         case " ":
-          game.torpedo.directionY = 1;
+          game.shot();
           break;
       }
     }
@@ -46,16 +46,15 @@ window.onload = function () {
       // Stop the player's movement when the arrow keys are released
       switch (key) {
         case "ArrowLeft":
+          game.player.directionX = 0;
+          break;
         case "ArrowRight":
           game.player.directionX = 0;
           break;
-        case " ":
-          game.torpedo.directionY = 0;
-          break;
       }
     }
+    // Add the handleKeydown function as an event listener for the keydown event
   }
-  // Add the handleKeydown function as an event listener for the keydown event
   window.addEventListener("keydown", handleKeydown);
   window.addEventListener("keyup", handleKeyup);
 };

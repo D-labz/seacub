@@ -5,13 +5,14 @@ class Game {
     this.gameScreen = document.getElementById("game-screen");
     this.gameEndScreen = document.getElementById("game-end");
     this.player = null;
+    this.torpedos = [];
     this.height = 610;
     this.width = 971;
     this.enemy = [];
     this.score = 0;
     this.gameIsOver = false;
     this.gameIntervalId;
-    this.gameLoopFrequency = 60;
+    this.gameLoopFrequency = 16;
   }
 
   start() {
@@ -26,9 +27,22 @@ class Game {
     this.player = new Player(this.gameScreen, 50, 570, 150, 50);
   }
 
+  shot() {
+    this.torpedos.push(
+      new Torpedo(
+        this.gameScreen,
+        this.player.left + 75,
+        this.player.top,
+        5,
+        15
+      )
+    );
+  }
+
   gameLoop() {
     console.log("in the game loop");
     this.update();
+
     if (this.gameIsOver) {
       clearInterval(this.gameIntervalId);
     }
@@ -36,5 +50,9 @@ class Game {
   update() {
     console.log("in the update");
     this.player.move();
+
+    this.torpedos.forEach((element) => {
+      element.shot();
+    });
   }
 }
