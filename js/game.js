@@ -22,6 +22,8 @@ class Game {
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
+
+    this.player = new Player(this.gameScreen, 50, 570, 150, 50);
   }
 
   gameLoop() {
@@ -33,5 +35,6 @@ class Game {
   }
   update() {
     console.log("in the update");
+    this.player.move();
   }
 }
