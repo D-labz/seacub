@@ -12,7 +12,7 @@ class Game {
     this.score = 0;
     this.gameIsOver = false;
     this.gameIntervalId;
-    this.gameLoopFrequency = 16;
+    this.gameLoopFrequency = Math.floor(1000 / 60);
   }
 
   start() {
@@ -50,9 +50,22 @@ class Game {
   update() {
     console.log("in the update");
     this.player.move();
+    const boats = [...document.querySelectorAll(".enemy")];
+    setTimeout(() => {
+      if (this.enemy.length >= 1) return;
+      const newBoat = new Boat(this.gameScreen,500,150,50,"./images/enemy.png"); // prettier-ignore
+      this.enemy.push(newBoat); // prettier-ignore
+      this.enemy.forEach((enemy) => enemy.create("left"));
+    }, 1);
 
     this.torpedos.forEach((element) => {
       element.shot();
+    });
+    console.log(boats);
+    boats.forEach((boat) => {
+      this.enemy.forEach((enemy) => {
+        enemy.move(1, boat);
+      });
     });
   }
 }
