@@ -63,6 +63,7 @@ body button {
   font-family: "Press Start 2P", cursive;
   font-size: 20px; /* Adjust size as necessary */
   background: linear-gradient(to bottom, #ff9966, #ff5e5e);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: #ff9966;
