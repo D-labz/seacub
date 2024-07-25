@@ -46,6 +46,7 @@ class Boat {
   }
 
   move(directionX, boat) {
+    console.log("moving");
     const currentWidth = parseInt(
       boat.style.width.slice(0, boat.style.width.length - 2)
     );

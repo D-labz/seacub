@@ -8,7 +8,7 @@ class Game {
     this.torpedos = [];
     this.height = 610;
     this.width = 971;
-    this.enemy = [];
+    this.handler = new EnemyLimitHandler();
     this.score = 0;
     this.gameIsOver = false;
     this.gameIntervalId;
@@ -56,26 +56,24 @@ class Game {
       this.player.fuel,
       this.player.torps
     );
+    this.handler.move(-1);
     console.log("in the update");
     this.player.move();
     setTimeout(() => {
-      if (this.enemy.length >= 3) return;
+      if (this.handler.enemies.length >= 3) return;
       const newBoat = new Boat(this.gameScreen,150,50,"./images/enemy.png"); // prettier-ignore
-      this.enemy.push(newBoat);
-      this.enemy.forEach((enemy) => enemy.create("left"));
+      this.handler.add(newBoat);
     }, 1000);
 
     this.torpedos.forEach((element) => {
       element.shot();
     });
-    this.enemy.forEach((enemy) => {
-      enemy.move(1, enemy.boat);
-    });
 
-    for (let i = 0; i < this.enemy.length; i++) {
-      if (this.enemy[i] == undefined) continue;
-      const enemy = this.enemy[i];
-      this.removeHitBoat(enemy, i);
+    this.handler.filter();
+    for (let i = 0; i < this.handler.enemies.length; i++) {
+      if (this.handler.enemies[i] == undefined) continue;
+      const enemy = this.handler.enemies[i];
+      //this.removeHitBoat(enemy, i);
       for (let j = 0; j < this.torpedos.length; j++) {
         // If the player's car collides with an obstacle
         const torpedo = this.torpedos[j];
@@ -83,7 +81,7 @@ class Game {
           // Remove the obstacle element from the DOM
           enemy.isHit = true;
           torpedo.element.remove();
-          console.log("enemy ", this.enemy);
+          console.log("enemy ", this.handler.enemies);
           // Remove enemy object from the array
 
           //Need to implement kills to increase +1
@@ -92,15 +90,15 @@ class Game {
     }
   }
 
-  removeHitBoat(obj, i) {
-    if (obj.isHit) {
-      console.log("removing ", obj);
-      this.player.boatsRemaining--;
-      this.player.score++;
+  // removeHitBoat(obj, i) {
+  //   if (obj.isHit) {
+  //     console.log("removing ", obj);
+  //     this.player.boatsRemaining--;
+  //     this.player.score++;
 
-      obj.boat.remove();
-      this.enemy.splice(0 ? this.enemy.length <= 0 : i, 1);
-      console.log("remove ", this.enemy);
-    }
-  }
+  //     obj.boat.remove();
+  //     this.enemy.splice(0 ? this.enemy.length <= 0 : i, 1);
+  //     console.log("remove ", this.enemy);
+  //   }
+  // }
 }
