@@ -56,22 +56,16 @@ class Game {
       this.player.fuel,
       this.player.torps
     );
-    console.log("in the update");
     this.player.move();
-    setTimeout(() => {
-      if (this.enemy.length >= 3) return;
-      const newBoat = new Boat(this.gameScreen,150,50,"./images/enemy.png"); // prettier-ignore
-      this.enemy.push(newBoat);
-      this.enemy.forEach((enemy) => enemy.create("left"));
-    }, 1000);
-
+    // Torpedos movement
     this.torpedos.forEach((element) => {
       element.shot();
     });
+    // Enemy movement
     this.enemy.forEach((enemy) => {
       enemy.move(1, enemy.boat);
     });
-
+    // Check for collisions
     for (let i = 0; i < this.enemy.length; i++) {
       if (this.enemy[i] == undefined) continue;
       const enemy = this.enemy[i];
@@ -85,10 +79,16 @@ class Game {
           torpedo.element.remove();
           console.log("enemy ", this.enemy);
           // Remove enemy object from the array
-
           //Need to implement kills to increase +1
         }
       }
+    }
+    // Generate Enemies
+    console.log("enemy length", this.enemy);
+    if (Math.random() > 0.985 && this.enemy.length < 5) {
+      const newBoat = new Boat(this.gameScreen,150,50,"./images/enemy.png"); // prettier-ignore
+      this.enemy.push(newBoat);
+      newBoat.create("left");
     }
   }
 
