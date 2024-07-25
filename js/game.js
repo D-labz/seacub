@@ -53,7 +53,7 @@ class Game {
     const boats = [...document.querySelectorAll(".enemy")];
     setTimeout(() => {
       if (this.enemy.length >= 1) return;
-      const newBoat = new Boat(this.gameScreen,500,150,50,"./images/enemy.png"); // prettier-ignore
+      const newBoat = new Boat(this.gameScreen,160,150,50,"./images/enemy.png"); // prettier-ignore
       this.enemy.push(newBoat); // prettier-ignore
       this.enemy.forEach((enemy) => enemy.create("left"));
     }, 1);

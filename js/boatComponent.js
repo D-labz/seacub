@@ -21,7 +21,7 @@ class Boat {
     boat.setAttribute("class", "enemy");
 
     if (spawnLocation === "left") {
-      boat.style.left = `0px`;
+      boat.style.left = `-${200}px`;
     } else if (spawnLocation === "right") {
       boat.style.left = `${
         parseInt(
