@@ -9,6 +9,7 @@ class Boat {
     this.imgSrc = imgSrc;
     this.isSpawning = false;
     this.boat;
+    this.isHit = false;
   }
 
   create(spawnLocation) {
