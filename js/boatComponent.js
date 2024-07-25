@@ -7,6 +7,7 @@ class Boat {
     this.directionX = 0;
     this.imgSrc = imgSrc;
     this.isSpawning = false;
+    this.boat;
   }
 
   create(spawnLocation) {
@@ -34,6 +35,7 @@ class Boat {
     }
 
     this.gameScreen.appendChild(boat);
+    this.boat = boat;
     setTimeout(() => (this.isSpawning = false), 5000);
 
     // Return the created boat element for later reference

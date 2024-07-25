@@ -75,7 +75,8 @@ class Game {
         const torpedo = this.torpedos[j];
         if (torpedo.didCollide(enemy)) {
           // Remove the obstacle element from the DOM
-          enemy.element.remove();
+          enemy.boat.remove();
+          torpedo.element.remove();
           // Remove enemy object from the array
 
           //Need to implement kills to increase +1

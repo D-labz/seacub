@@ -33,7 +33,8 @@ class Torpedo {
 
   didCollide(enemy) {
     const torpedoRect = this.element.getBoundingClientRect();
-    const enemyRect = enemy.element.getBoundingClientRect();
+    const enemyRect = enemy.boat.getBoundingClientRect();
+    console.log(enemyRect);
 
     if (
       torpedoRect.left < enemyRect.right &&
