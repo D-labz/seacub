@@ -25,7 +25,7 @@ class Game {
       this.gameLoop();
     }, this.gameLoopFrequency);
 
-    this.player = new Player(this.gameScreen, 50, 570, 150, 50);
+    this.player = new Player(this.gameScreen, 50, 520, 150, 50);
   }
 
   shot() {

@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
     <title>SEACUB</title>
   </head>
   <body>
@@ -15,21 +19,29 @@
         <button id="start-button">Start Game</button>
         <p>
           Use the left and right arrows keys to control the ship, and space key
-          to shoot torpedos.
+          to shoot torpedos. Reach 30 kills before fuel runs out.
         </p>
       </div>
-
       <div id="game-container">
         <!-- #game-screen is initially hidden using CSS style display: none -->
         <div id="game-screen">
+          <!-- Game content goes here -->
           <div id="game-scoreboard">
-            <div id="fuel-counter"></div>
-            <div id="torps-counter"></div>
-            <div id="score-counter"></div>
+            <div class="text-style" id="fuel-counter">
+              FUEL<br />
+              00
+            </div>
+            <div class="text-style" id="torps-counter">
+              TRPS<br />
+              00
+            </div>
+            <div class="text-style" id="kills-counter">
+              KILLS<br />
+              00
+            </div>
           </div>
         </div>
       </div>
-
       <!-- #game-end is initially hidden using CSS style display: none -->
       <div id="game-end">
         <img src="./images/sea.jpg" alt="" class="logo-img" />
