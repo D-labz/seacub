@@ -10,6 +10,8 @@ class Boat {
     this.isSpawning = false;
     this.boat;
     this.isHit = false;
+    this.outOfBounds = false;
+    this.randSpeed = Math.floor(Math.random() * 5);
   }
 
   create(spawnLocation) {
@@ -45,17 +47,17 @@ class Boat {
     return boat;
   }
 
-  move(directionX, boat) {
+  move(boat) {
     const currentWidth = parseInt(
       boat.style.width.slice(0, boat.style.width.length - 2)
     );
     const currentLeft = parseInt(
       boat.style.left.slice(0, boat.style.left.length - 2)
     );
-    boat.style.left = `${currentLeft + directionX}px`;
-    if (currentLeft > this.gameScreen.offsetWidth + currentWidth) {
-      console.log("removed");
-      boat.remove();
+    boat.style.left = `${currentLeft + this.randSpeed}px`;
+    if (currentLeft > this.gameScreen.offsetWidth + 10) {
+      // console.log("removed");
+      this.outOfBounds = true;
       return true;
     }
   }

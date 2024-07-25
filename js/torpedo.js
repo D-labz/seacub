@@ -20,7 +20,7 @@ class Torpedo {
   }
 
   shot() {
-    this.top -= 5;
+    this.top -= 3;
     if (this.top < 120) {
       this.element.remove();
     }
@@ -34,7 +34,7 @@ class Torpedo {
   didCollide(enemy) {
     const torpedoRect = this.element.getBoundingClientRect();
     const enemyRect = enemy.boat.getBoundingClientRect();
-    console.log(enemyRect);
+    // console.log(enemyRect);
 
     if (
       torpedoRect.left < enemyRect.right &&

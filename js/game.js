@@ -14,6 +14,7 @@ class Game {
     this.gameIntervalId;
     this.gameLoopFrequency = Math.floor(1000 / 60);
     this.scoreboard = new Scoreboard();
+    this.timer;
   }
 
   start() {
@@ -24,6 +25,14 @@ class Game {
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
+
+    this.timer = setInterval(() => {
+      if (this.player.fuel == 0) {
+        this.end();
+        return;
+      }
+      this.player.fuel--;
+    }, 1000);
 
     this.player = new Player(this.gameScreen, 50, 520, 150, 50);
   }
@@ -36,14 +45,14 @@ class Game {
         this.gameScreen,
         this.player.left + 75,
         this.player.top,
-        5,
-        15
+        7,
+        27
       )
     );
   }
 
   gameLoop() {
-    console.log("in the game loop");
+    // console.log("in the game loop");
     this.update();
 
     if (this.gameIsOver) {
@@ -63,7 +72,7 @@ class Game {
     });
     // Enemy movement
     this.enemy.forEach((enemy) => {
-      enemy.move(1, enemy.boat);
+      enemy.move(enemy.boat);
     });
     // Check for collisions
     for (let i = 0; i < this.enemy.length; i++) {
@@ -77,14 +86,14 @@ class Game {
           // Remove the obstacle element from the DOM
           enemy.isHit = true;
           torpedo.element.remove();
-          console.log("enemy ", this.enemy);
+          // console.log("enemy ", this.enemy);
           // Remove enemy object from the array
           //Need to implement kills to increase +1
         }
       }
     }
     // Generate Enemies
-    console.log("enemy length", this.enemy);
+    // console.log("enemy length", this.enemy);
     if (Math.random() > 0.985 && this.enemy.length < 5) {
       const newBoat = new Boat(this.gameScreen,150,50,"./images/enemy.png"); // prettier-ignore
       this.enemy.push(newBoat);
@@ -93,14 +102,22 @@ class Game {
   }
 
   removeHitBoat(obj, i) {
-    if (obj.isHit) {
-      console.log("removing ", obj);
+    if (obj.isHit || obj.outOfBounds) {
+      // console.log("removing ", obj);
       this.player.boatsRemaining--;
       this.player.score++;
 
       obj.boat.remove();
       this.enemy.splice(0 ? this.enemy.length <= 0 : i, 1);
-      console.log("remove ", this.enemy);
+      // console.log("remove ", this.enemy);
     }
+  }
+
+  end() {
+    this.gameScreen.style.display = "none";
+    this.gameEndScreen.style.display = "block";
+    clearInterval(this.timer);
+    clearInterval(this.gameIntervalId);
+    this.gameIsOver = true;
   }
 }

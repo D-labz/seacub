@@ -58,6 +58,10 @@ window.onload = function () {
           keyDown = false;
       }
     }
+
+    restartButton.addEventListener("click", () => {
+      location.reload();
+    });
     // Add the handleKeydown function as an event listener for the keydown event
   }
   window.addEventListener("keydown", handleKeydown);
