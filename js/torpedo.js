@@ -30,4 +30,20 @@ class Torpedo {
   updatePosition() {
     this.element.style.top = `${this.top}px`;
   }
+
+  didCollide(enemy) {
+    const torpedoRect = this.element.getBoundingClientRect();
+    const enemyRect = enemy.element.getBoundingClientRect();
+
+    if (
+      torpedoRect.left < enemyRect.right &&
+      torpedoRect.right > enemyRect.left &&
+      torpedoRect.top < enemyRect.bottom &&
+      torpedoRect.bottom > enemyRect.top
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

@@ -67,5 +67,20 @@ class Game {
         enemy.move(1, boat);
       });
     });
+
+    for (let i = 0; i < this.enemy.length; i++) {
+      const enemy = this.enemy[i];
+      for (let j = 0; j < this.torpedos.length; j++) {
+        // If the player's car collides with an obstacle
+        const torpedo = this.torpedos[j];
+        if (torpedo.didCollide(enemy)) {
+          // Remove the obstacle element from the DOM
+          enemy.element.remove();
+          // Remove enemy object from the array
+
+          //Need to implement kills to increase +1
+        }
+      }
+    }
   }
 }
