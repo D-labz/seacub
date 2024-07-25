@@ -38,7 +38,7 @@ class Game {
   }
 
   shot() {
-    if (this.torpedos.length >= 50) {
+    if (this.torpedos.length >= 25) {
       this.end();
       return;
     }
@@ -105,7 +105,11 @@ class Game {
   }
 
   removeHitBoat(obj, i) {
-    if (obj.isHit || obj.outOfBounds) {
+    if (obj.outOfBounds) {
+      obj.boat.remove();
+      this.enemy.splice(0 ? this.enemy.length <= 0 : i, 1);
+    }
+    if (obj.isHit) {
       // console.log("removing ", obj);
       this.player.boatsRemaining--;
       this.player.score++;
