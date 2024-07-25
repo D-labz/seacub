@@ -38,7 +38,10 @@ class Game {
   }
 
   shot() {
-    if (this.torpedos.length >= 50) return;
+    if (this.torpedos.length >= 50) {
+      this.end();
+      return;
+    }
     this.player.torps--;
     this.torpedos.push(
       new Torpedo(
