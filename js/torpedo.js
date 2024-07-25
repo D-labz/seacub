@@ -20,7 +20,7 @@ class Torpedo {
   }
 
   shot() {
-    this.top -= 3;
+    this.top -= 5;
     if (this.top < 120) {
       this.element.remove();
     }

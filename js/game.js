@@ -52,8 +52,8 @@ class Game {
     this.player.move();
     const boats = [...document.querySelectorAll(".enemy")];
     setTimeout(() => {
-      if (this.enemy.length >= 1) return;
-      const newBoat = new Boat(this.gameScreen,160,150,50,"./images/enemy.png"); // prettier-ignore
+      if (this.enemy.length >= 3) return;
+      const newBoat = new Boat(this.gameScreen,150,50,"./images/enemy.png"); // prettier-ignore
       this.enemy.push(newBoat); // prettier-ignore
       this.enemy.forEach((enemy) => enemy.create("left"));
     }, 1);
@@ -62,13 +62,12 @@ class Game {
       element.shot();
     });
     console.log(boats);
-    boats.forEach((boat) => {
-      this.enemy.forEach((enemy) => {
-        enemy.move(1, boat);
-      });
+    this.enemy.forEach((enemy) => {
+      enemy.move(1, enemy.boat);
     });
 
     for (let i = 0; i < this.enemy.length; i++) {
+      if (this.enemy[i] == undefined) continue;
       const enemy = this.enemy[i];
       for (let j = 0; j < this.torpedos.length; j++) {
         // If the player's car collides with an obstacle
@@ -76,7 +75,10 @@ class Game {
         if (torpedo.didCollide(enemy)) {
           // Remove the obstacle element from the DOM
           enemy.boat.remove();
+          this.enemy.splice(i, 1);
           torpedo.element.remove();
+          i--;
+          console.log("enemy ", this.enemy);
           // Remove enemy object from the array
 
           //Need to implement kills to increase +1

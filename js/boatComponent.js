@@ -1,7 +1,8 @@
 class Boat {
-  constructor(gameScreen, top, width, height, imgSrc) {
+  constructor(gameScreen, width, height, imgSrc) {
+    // 160, 210, 100, 260
     this.gameScreen = gameScreen;
-    this.top = top;
+    this.top = [100, 160, 220];
     this.width = width;
     this.height = height;
     this.directionX = 0;
@@ -11,13 +12,14 @@ class Boat {
   }
 
   create(spawnLocation) {
+    const rand = Math.floor(Math.random() * this.top.length);
     if (this.isSpawning) return;
     this.isSpawning = true;
     const boat = document.createElement("img");
     boat.setAttribute("src", this.imgSrc);
     boat.style.width = `${this.width}px`;
     boat.style.height = `${this.height}px`;
-    boat.style.top = `${this.top}px`;
+    boat.style.top = `${this.top[rand]}px`;
     boat.style.position = "absolute";
     boat.setAttribute("class", "enemy");
 
@@ -53,6 +55,7 @@ class Boat {
     if (currentLeft > this.gameScreen.offsetWidth + currentWidth) {
       console.log("removed");
       boat.remove();
+      return true;
     }
   }
 }
